@@ -42,9 +42,38 @@ class Airplane {
 */
 
 class Person {
-  
+  constructor(name,age){
+    this.name = name;
+    this.age = age;
+    this.stomach = [];
+  }
+  eat(edible){
+    if(this.stomach.length <10 ){
+      this.stomach.push(edible);
+    }
+  }
+  poop(){
+    this.stomach = [];
+  }
+  toString(){
+    return `${this.name}, ${this.age}`;
+  }
 }
+const kevin= new Person('Kevin',26);
+const leo = new Person('Leo',18);
 
+kevin.eat('pizza');
+kevin.eat('tacos');
+kevin.eat('sushi');
+kevin.eat('pasta');
+kevin.eat('sandwich');
+console.log(kevin.stomach);
+
+kevin.poop();
+
+console.log(kevin.stomach);
+
+console.log(kevin.toString ());
 /*
   TASK 2
     - Write a Car class whose constructor initializes `model` and `milesPerGallon` from arguments.
@@ -60,8 +89,33 @@ class Person {
 */
 
 class Car {
-  
+  constructor(model,milesPerGallon){
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0;
+  this.odometer = 0;
 }
+fill(gallons){
+this.tank = this.tank + gallons;
+}
+drive(distance){
+  const milesDriven = this.tank * this.milesPerGallon
+  if(distance <= milesDriven){
+    this.odometer = this.odometer * this.milesPerGallon;
+    this.tank = this.tank - (distance /this.milesPerGallon);
+  }else{
+    this.odometer = this.odometer + milesDriven;
+    this.tank= 0;
+    return`I ran out of fuel at ${this.odometer} miles!`;
+  }
+
+}}
+const ryohDucky = new Car('ryohDucky',20);
+
+console.log(ryohDucky.model);
+ryohDucky.fill(5000);
+console.log(ryohDucky.tank);
+console.log(ryohDucky.odometer);
 
 /*
   TASK 3
@@ -76,9 +130,21 @@ class Car {
         + {name} and {location} of course come from the instance's own properties.
 */
 class Lambdasian {
-  
-}
+  constructor({name,age,location}){
+    this.name=name;
+    this.age=age;
+    this.location=location;
 
+  }
+  speak(){
+    return`Hello my name is ${this.name}, I am from ${this.location}`;
+  }
+}
+const dave = new Lambdasian('Dave', 27, 'Alabama')
+// console.log(dave.name);
+// console.log(dave.age);
+// console.log(dave.location);
+console.log(new Lambdasian('Dave',27,'Alabama'));
 /*
   TASK 4
     - Write an Instructor class extending Lambdasian.
